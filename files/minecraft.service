@@ -1,0 +1,10 @@
+[Unit]
+Description=Minecraft Server on start up
+Wants=network-online.target
+[Service]
+User=minecraft
+WorkingDirectory=/opt/minecraft/server
+ExecStart=/opt/minecraft/server/start
+StandardInput=null
+[Install]
+WantedBy=multi-user.target
