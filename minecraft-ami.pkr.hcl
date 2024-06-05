@@ -21,6 +21,10 @@ source "amazon-ebs" "minecraft" {
     owners      = ["137112412989"]
   }
   ssh_username = "ec2-user"
+  tags = {
+    type = "minecraft-server"
+    OS_Version = "Amazon Linux"
+  }
 }
 
 build {

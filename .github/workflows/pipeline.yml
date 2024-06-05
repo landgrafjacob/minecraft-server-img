@@ -1,0 +1,39 @@
+name: wordle-solver
+on:
+  push
+env:
+  AWS_REGION : "us-west-2"
+  IAM_ROLE: ${{ secrets.IAM_ROLE }}
+# permission can be added at job level or workflow level
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+jobs:
+  packer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git clone the repository
+        uses: actions/checkout@v4
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: ${{ env.IAM_ROLE }}
+          role-session-name: GitHubActionSession
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup `packer`
+        uses: hashicorp/setup-packer@main
+        id: setup
+
+      - name: Run `packer init`
+        id: init
+        run: "packer init ."
+
+      - name: Run `packer validate`
+        id: validate
+        run: "packer validate ."
+
+      - name: Run `packer build`
+        id: build
+        run: "packer build ."
