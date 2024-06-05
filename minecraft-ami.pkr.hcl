@@ -8,7 +8,7 @@ packer {
 }
 
 source "amazon-ebs" "minecraft" {
-  ami_name      = "minecraft-server-ami"
+  ami_name      = "minecraft-server-ami-{{timestamp}}"
   instance_type = "t4g.small"
   region        = "us-east-2"
   source_ami_filter {
