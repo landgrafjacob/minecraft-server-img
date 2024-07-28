@@ -2,7 +2,7 @@ name: wordle-solver
 on:
   push
 env:
-  AWS_REGION : "us-west-2"
+  AWS_REGION : "us-east-2"
   IAM_ROLE: ${{ secrets.IAM_ROLE }}
   PKR_VAR_minecraft_url: ${{ secrets.MINECRAFT_URL }}
 # permission can be added at job level or workflow level
